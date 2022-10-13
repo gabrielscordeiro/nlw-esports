@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
-  "scripts": {
-    "dev": "tsnd src/server.ts",
+  "scripts": {  
+    "dev": "tsnd --exit-child src/server.ts",
     "build": "tsc"
   },
   "keywords": [],
