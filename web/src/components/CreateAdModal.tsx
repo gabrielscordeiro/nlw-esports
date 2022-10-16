@@ -31,7 +31,7 @@ export function CreateAdModal() {
         })
     }, [])
 
-    function handleCreateAd(event: FormEvent){
+    async function handleCreateAd(event: FormEvent){
         event.preventDefault();
 
         /**
@@ -40,7 +40,26 @@ export function CreateAdModal() {
         const formData = new FormData(event.target as HTMLFormElement);
         const data = Object.fromEntries(formData);
 
-        
+        if(!data.name){
+            return;
+        }
+
+        try {
+            await axios.post(`http://localhost:3333/games/${data.game}/ads`, {
+                name: data.name,
+                yearsPlaying: Number(data.yearsPlaying),
+                discord: data.discord,
+                weekDays: weekDays.map(Number),
+                hourStart: data.hourStart,
+                hourEnd: data.hourStart,
+                useVoiceChannel: useVoiceChanel
+            });
+
+            alert('Anúncio criado com sucesso');
+        } catch (error) {
+            console.log(error);
+            alert('Erro ao criar o anúncio');
+        }
     }
 
 
